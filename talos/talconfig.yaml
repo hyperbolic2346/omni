@@ -12,14 +12,50 @@ additionalApiServerCertSans: &sans
   - "k8s.burntsheep.com"
 additionalMachineCertSans: *sans
 
-clusterPodNets: ["10.42.0.0/16"]
-clusterSvcNets: ["10.43.0.0/16"]
+clusterPodNets: ["10.244.0.0/16"]
+clusterSvcNets: ["10.96.0.0/12"]
 
 # Disable built-in CNI to use Cilium
 cniConfig:
   name: none
 
 nodes:
+  - hostname: "nuc0"
+    ipAddress: "10.0.10.7"
+    installDisk: "/dev/nvme0n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/09dbcadc567d93b02a1610c70d651fadbe56aeac3aaca36bc488a38f3fffe99d
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "88:ae:dd:08:ec:43"
+        dhcp: false
+        addresses:
+          - "10.0.10.7/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "10.0.10.1"
+        mtu: 1500
+        vip:
+          ip: "10.0.10.5"
+  - hostname: "dogbert"
+    ipAddress: "10.0.10.13"
+    installDisk: "/dev/nvme0n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/09dbcadc567d93b02a1610c70d651fadbe56aeac3aaca36bc488a38f3fffe99d
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "ac:1f:6b:0a:4b:72"
+        dhcp: false
+        addresses:
+          - "10.0.10.13/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "10.0.10.1"
+        mtu: 1500
 
 # Global patches
 patches:

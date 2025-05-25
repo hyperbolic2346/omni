@@ -58,7 +58,7 @@ tasks:
       - task: render-configs
       - task: encrypt-secrets
       - task: validate-kubernetes-config
-      #- task: validate-talos-config
+      - task: validate-talos-config
     preconditions:
       - msg: An existing Age key interferes with the age key in this repository, rename or delete ~/.config/sops/age/keys.txt
         sh: '! test -f ~/.config/sops/age/keys.txt'
