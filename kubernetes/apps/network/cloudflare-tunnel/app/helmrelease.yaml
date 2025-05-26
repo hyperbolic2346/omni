@@ -33,7 +33,7 @@ spec:
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_POST_QUANTUM: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
-              TUNNEL_LOGLEVEL: debug
+              QUIC_GO_LOG_LEVEL: ERROR
             envFrom:
               - secretRef:
                   name: cloudflare-tunnel-secret
