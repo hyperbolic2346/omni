@@ -8,7 +8,7 @@ spec:
   gatewayClassName: cilium
   addresses:
     - type: IPAddress
-      value: "10.0.10.1"
+      value: "10.0.10.3"
   listeners:
     - name: http
       protocol: HTTP
