@@ -17,10 +17,6 @@ spec:
       kind: HelmRelease
       name: *app
       namespace: *namespace
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   interval: 1h
   path: ./kubernetes/apps/volsync-system/volsync/app
   prune: true
